@@ -29,33 +29,33 @@ export default function Home() {
   return (
     <div className="min-h-screen p-6 gap-y-6 flex flex-col justify-start w-full">
       <section className="mt-20 text-5xl font-extrabold text-center">
-        <h1>mini-ERP SMEs & StartUp</h1>
-        <h1 className="text-4xl py-2" >Generation Thailand JSD#11</h1>
+        <h1>mini-ERP StartUp</h1>
+        <h1 className="text-4xl py-2 hidden md:block" >Generation Thailand JSD#11</h1>
       </section>
 
-      <section className="flex justify-center gap-x-12 font-bold">
+      <section className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-x-12 font-bold p-4">
         <button
           onClick={() => setView("user")}
-          className="p-5 bg-emerald-400 flex rounded-2xl cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
         >
           Sale&Mkt Department
         </button>
         <button
           onClick={() => setView("admin")}
-          className="p-5 bg-emerald-400 flex rounded-2xl cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
         >
           Purchase Department
         </button>
 
         <button
           onClick={() => setView("admin")}
-          className="p-5 bg-emerald-400 flex rounded-2xl cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
         >
           Production Department
         </button>
         <button
           onClick={() => setView("admin")}
-          className="p-5 bg-emerald-400 flex rounded-2xl cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
         >
           WareHouse Department
         </button>
@@ -79,8 +79,8 @@ export default function Home() {
         ) : null}
       </section>
 
-     <img src="dashboard2.jpg" alt="user image"
-     className="relative z-10 w-full min-h-screen flex items-center justify-center p-4 md:px-16"
+     <img src="artificial.gif" alt="dashboard image"
+     className="relative z-10 w-auto h-auto object-cover rounded-lg shadow-lg p-0 md:p-4"
       />
 
     </div>
