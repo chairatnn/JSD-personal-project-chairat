@@ -36,26 +36,26 @@ export default function Home() {
       <section className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-x-12 font-bold p-4">
         <button
           onClick={() => setView("user")}
-          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-blue-400 cursor-pointer border hover:bg-emerald-300"
         >
           Sale&Mkt Department
         </button>
         <button
           onClick={() => setView("admin")}
-          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-blue-400 cursor-pointer border hover:bg-emerald-300"
         >
           Purchase Department
         </button>
 
         <button
           onClick={() => setView("admin")}
-          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-blue-400 cursor-pointer border hover:bg-emerald-300"
         >
           Production Department
         </button>
         <button
           onClick={() => setView("admin")}
-          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-emerald-400 cursor-pointer border hover:bg-emerald-300"
+          className="w-full md:w-auto px-6 py-2 rounded-2xl bg-blue-400 cursor-pointer border hover:bg-emerald-300"
         >
           WareHouse Department
         </button>

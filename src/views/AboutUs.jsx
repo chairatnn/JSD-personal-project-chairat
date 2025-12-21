@@ -7,10 +7,10 @@ export default function AboutUs () {
         alt="user image"
         className="w-64 rounded-2xl"
       />
-      <p className="text-center text-xl">
+      <p className="text-center">
         <span className="text-2xl font-bold">Software Developer</span>
         <br /><br />I'm a developer who creates impactful digital experiences. With experience in developing responsive websites and skills spanning both frontend and backend, I'm always ready to learn and grow with new technologies.
-        <br /><span>Contact info:  https://my-personal-profile-blue.vercel.app/</span>
+        <br /><span>Contact info: https://sayan-portfolio-chairat.vercel.app/</span>
       </p>
     </div>
   );

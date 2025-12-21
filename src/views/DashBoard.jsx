@@ -87,15 +87,15 @@ const chartData3 = [
 const chartConfig3 = {
   desktop: {
     label: "Desktop",
-    color: "#0089BA",
+    color: "##0081CF",
   },
 };
 
 export default function DashBoard () {
   return (
     <ChartContainer config={chartConfig} className="min-h-50 w-full">
-      <h1 className="text-xl md:text-2xl font-bold text-center md:text-left">
-        VELVE Analysis Dashboard
+      <h1 className="text-xl md:text-2xl font-bold text-center md:text-left px-2 py-4">
+        Business Analysis Dashboard
       </h1>
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
@@ -112,7 +112,7 @@ export default function DashBoard () {
         <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
       </BarChart>
 
-      <Card className="flex flex-col">
+      <Card className="flex flex-col bg-gradient-to-br from-sage-dark to-blue-600">
         <CardHeader className="items-center pb-0">
           <CardTitle>Pie Chart - Label List</CardTitle>
           <CardDescription>January - June 2025</CardDescription>
@@ -148,7 +148,7 @@ export default function DashBoard () {
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card className="bg-gradient-to-br from-sage-dark to-blue-600">
         <CardHeader className="items-center">
           <CardTitle>Radar Chart - Dots</CardTitle>
           <CardDescription>
@@ -158,7 +158,7 @@ export default function DashBoard () {
         <CardContent className="pb-0">
           <ChartContainer
             config={chartConfig3}
-            className="mx-auto aspect-square max-h-62.5]"
+            className="[mx-auto aspect-square max-h-62.5]"
           >
             <RadarChart data={chartData3}>
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
@@ -166,7 +166,7 @@ export default function DashBoard () {
               <PolarGrid />
               <Radar
                 dataKey="desktop"
-                fill="var(--color-desktop)"
+                fill="#0081CF"
                 fillOpacity={0.6}
                 dot={{
                   r: 4,
