@@ -3,24 +3,27 @@ import { useState } from "react";
 
 export function AdminTable({ users, setUsers, fetchUsers, API }) {
   const [form, setForm] = useState({
-    name: "",
-    lastname: "",
-    position: "",
+    customer_name: "",
+    customer_address: "",
+    order_date: "",
+    order_qty: "",
+
   });
 
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({
-    name: "",
-    lastname: "",
-    position: "",
+    customer_name: "",
+    customer_address: "",
+    order_date: "",
+    order_qty: "",
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.data_id]: e.target.value });
   };
 
   const handleEditChange = (e) => {
-    setEditForm({ ...editForm, [e.target.name]: e.target.value });
+    setEditForm({ ...editForm, [e.target.data_id]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -30,9 +33,10 @@ export function AdminTable({ users, setUsers, fetchUsers, API }) {
       await fetchUsers();
       // Reset the form
       setForm({
-        name: "",
-        lastname: "",
-        position: "",
+        customer_name: "",
+        customer_address: "",
+        order_date: "",
+        order_qty: "",
       });
     } catch (error) {
       console.error("Error creating user:", error);
@@ -40,7 +44,7 @@ export function AdminTable({ users, setUsers, fetchUsers, API }) {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Delete this user?")) return;
+    if (!window.confirm("Delete this data?")) return;
     await axios.delete(`${API}/${id}`);
     setUsers(users.filter((user) => user.id !== id));
   };
@@ -48,9 +52,10 @@ export function AdminTable({ users, setUsers, fetchUsers, API }) {
   const handleEdit = (user) => {
     setEditId(user.id);
     setEditForm({
-      name: user.name,
-      lastname: user.lastname,
-      position: user.position,
+      customer_name: user.customer_name,
+      customer_address: user.customer_address,
+      order_date: user.order_date,
+      order_qty: user.order_qty,
     });
   };
 
@@ -60,7 +65,7 @@ export function AdminTable({ users, setUsers, fetchUsers, API }) {
       await fetchUsers();
       setEditId(null);
     } catch (error) {
-      console.error("Error updating member:", error);
+      console.error("Error updating data:", error);
     }
   };
 
@@ -73,38 +78,46 @@ export function AdminTable({ users, setUsers, fetchUsers, API }) {
       <form onSubmit={handleSubmit} className="pb-3">
         <input
           onChange={handleChange}
-          value={form.name}
-          name="name"
+          value={form.customer_name}
+          customer_name="customer_name"
           className="bg-white mx-1 w-32 px-2 rounded border"
-          placeholder="Name"
+          placeholder="Customer Name"
         />
         <input
           onChange={handleChange}
-          value={form.lastname}
-          name="lastname"
+          value={form.customer_address}
+          customer_address="customer_address"
           className="bg-white mx-1 w-32 px-2 rounded border"
-          placeholder="Last name"
+          placeholder="Customer Address"
         />
-        <input
+         <input
           onChange={handleChange}
-          value={form.position}
-          name="position"
+          value={form.order_date}
+          order_date="order_date"
           className="bg-white mx-1 w-32 px-2 rounded border"
-          placeholder="Position"
+          placeholder="Order Date"
+        />
+         <input
+          onChange={handleChange}
+          value={form.order_qty}
+          order_qty="order_qty"
+          className="bg-white mx-1 w-32 px-2 rounded border"
+          placeholder="Order QTY"
         />
         <button
           type="submit"
           className="cursor-pointer bg-sky-500 hover:bg-sky-600 text-white px-3 py-2 mx-1 rounded-4xl"
         >
-          Save new user
+          Save new data
         </button>
       </form>
       <table className="w-full border-separate">
         <thead>
           <tr className="text-center font-bold bg-gray-200">
-            <th className="border rounded-tl-lg p-2">Name</th>
-            <th className="border p-2">Last name</th>
-            <th className="border p-2">Position</th>
+            <th className="border p-2">Customer_Name</th>
+            <th className="border p-2">Customer_Address</th>
+            <th className="border p-2">Order_Date</th>
+            <th className="border p-2">Order_QTY</th>
             <th className="border rounded-tr-lg p-2">Action</th>
           </tr>
         </thead>
@@ -115,25 +128,33 @@ export function AdminTable({ users, setUsers, fetchUsers, API }) {
                 <>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.name}
+                      value={editForm.customer_name}
                       onChange={handleEditChange}
-                      name="name"
+                      name="customer_name"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.lastname}
+                      value={editForm.customer_address}
                       onChange={handleEditChange}
-                      name="lastname"
+                      name="customer_address"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
-                  <td className="border p-2 ">
+                     <td className="border p-2 ">
                     <input
-                      value={editForm.position}
+                      value={editForm.order_date}
                       onChange={handleEditChange}
-                      name="position"
+                      name="order_date"
+                      className="bg-white w-24 px-2 rounded border"
+                    />
+                  </td>
+                     <td className="border p-2 ">
+                    <input
+                      value={editForm.order_qty}
+                      onChange={handleEditChange}
+                      name="order_qty"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
@@ -154,13 +175,14 @@ export function AdminTable({ users, setUsers, fetchUsers, API }) {
                 </>
               ) : (
                 <>
-                  <td className="border p-2 ">{user.name}</td>
-                  <td className="border p-2 ">{user.lastname}</td>
-                  <td className="border p-2 ">{user.position}</td>
+                  <td className="border p-2 ">{user.customer_name}</td>
+                  <td className="border p-2 ">{user.customer_address}</td>
+                  <td className="border p-2 ">{user.order_date}</td>
+                  <td className="border p-2 ">{user.order_qty}</td>
                   <td className="border p-2 ">
                     <button
                       onClick={() => handleEdit(user)}
-                      className="cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-green-400 hover:bg-green-500 text-white px-2 rounded-xl"
                     >
                       Edit
                     </button>
