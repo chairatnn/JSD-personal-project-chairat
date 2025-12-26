@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
-import DashBoard from "./DashBoard";
 
 export function Layout() {
   return (
