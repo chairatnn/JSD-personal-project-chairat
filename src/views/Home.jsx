@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div className="min-h-screen p-6 gap-y-6 flex flex-col justify-start w-full">
       <section className="mt-10 text-5xl font-extrabold text-center">
-        <h1>mini-ERP SMEs / StartUp</h1>
+        <h1>mini-ERP for StartUp</h1>
         <h1 className="text-4xl py-2 hidden md:block">
           Generation Thailand JSD#11
         </h1>
@@ -120,7 +120,7 @@ export default function Home() {
               <source src="city.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <p className="text-center mt-4 text-black-400 font-medium">Welcome to mini-ERP Dashboard</p>
+            <p className="text-center mt-4 text-black-400 font-medium">© 2025 Chairat Nuansamniang. Welcome to mini-ERP for StartUp</p>
           </div>
     </div>
   );

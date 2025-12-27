@@ -74,33 +74,33 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
 
   return (
     <div className="flex flex-col items-center">
-      <form onSubmit={handleSubmit} className="pb-3">
+      <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
         <input
           onChange={handleChange}
           value={form.product_name}
           customer_name="product_name"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Product Name"
         />
         <input
           onChange={handleChange}
           value={form.product_qty}
           customer_address="product_qrt"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Product QTY"
         />
         <input
           onChange={handleChange}
           value={form.material_name}
           order_date="material_name"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Material Name"
         />
         <input
           onChange={handleChange}
           value={form.material_qty}
           order_qty="material_qty"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Material QTY"
         />
         <button

@@ -75,33 +75,33 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
 
   return (
     <div className="flex flex-col items-center">
-      <form onSubmit={handleSubmit} className="pb-3">
+      <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
         <input
           onChange={handleChange}
           value={form.customer_name}
           customer_name="customer_name"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Customer Name"
         />
         <input
           onChange={handleChange}
           value={form.customer_address}
           customer_address="customer_address"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Customer Address"
         />
          <input
           onChange={handleChange}
           value={form.order_date}
           order_date="order_date"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Order Date"
         />
          <input
           onChange={handleChange}
           value={form.order_qty}
           order_qty="order_qty"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Order QTY"
         />
         <button

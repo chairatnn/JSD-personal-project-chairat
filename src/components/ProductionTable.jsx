@@ -70,26 +70,26 @@ export function ProductionTable({ users, setUsers, fetchUsers, API }) {
 
   return (
     <div className="flex flex-col items-center">
-      <form onSubmit={handleSubmit} className="pb-3">
+      <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
         <input
           onChange={handleChange}
           value={form.production_date}
           customer_name="production_date"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Production Date"
         />
         <input
           onChange={handleChange}
           value={form.product_name}
           customer_address="product_name"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Product Name"
         />
         <input
           onChange={handleChange}
           value={form.production_output}
           order_date="production_output"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Production Output"
         />
         <button

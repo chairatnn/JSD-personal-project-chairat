@@ -74,33 +74,33 @@ export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
 
   return (
     <div className="flex flex-col items-center">
-      <form onSubmit={handleSubmit} className="pb-3">
+      <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
         <input
           onChange={handleChange}
           value={form.supplier_name}
           customer_name="supplier_name"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Supplier Name"
         />
         <input
           onChange={handleChange}
           value={form.supplier_location}
           customer_address="supplier_location"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Supplier Location"
         />
         <input
           onChange={handleChange}
           value={form.material_name}
           order_date="material_name"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Material Name"
         />
         <input
           onChange={handleChange}
           value={form.material_qty}
           order_qty="material_qty"
-          className="bg-white mx-1 w-32 px-2 rounded border"
+          className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Material QTY"
         />
         <button
