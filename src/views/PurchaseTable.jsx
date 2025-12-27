@@ -1,28 +1,28 @@
 import axios from "axios";
 import { useState } from "react";
 
-export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
+export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
   const [form, setForm] = useState({
-    product_name: "",
-    product_qty: "",
+    supplier_name: "",
+    supplier_location: "",
     material_name: "",
     material_qty: "",
   });
 
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({
-     product_name: "",
-    product_qty: "",
+    supplier_name: "",
+    supplier_location: "",
     material_name: "",
     material_qty: "",
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.data_id]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleEditChange = (e) => {
-    setEditForm({ ...editForm, [e.target.data_id]: e.target.value });
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -32,35 +32,35 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
       await fetchUsers();
       // Reset the form
       setForm({
-   product_name: "",
-    product_qty: "",
-    material_name: "",
-    material_qty: "",
+        supplier_name: "",
+        supplier_location: "",
+        material_name: "",
+        material_qty: "",
       });
     } catch (error) {
       console.error("Error creating user:", error);
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (data_id) => {
     if (!window.confirm("Delete this data?")) return;
-    await axios.delete(`${API}/${id}`);
-    setUsers(users.filter((user) => user.id !== id));
+    await axios.delete(`${API}/${data_id}`);
+    setUsers(users.filter((user) => user.data_id !== data_id));
   };
 
   const handleEdit = (user) => {
-    setEditId(user.id);
+    setEditId(user.data_id);
     setEditForm({
-      product_name: user.product_name,
-      product_qty: user.product_qty,
+      supplier_name: user.supplier_name,
+      supplier_location: user.supplier_location,
       material_name: user.material_name,
       material_qty: user.material_qty,
     });
   };
 
-  const handleEditSave = async (id) => {
+  const handleEditSave = async (data_id) => {
     try {
-      await axios.put(`${API}/${id}`, editForm);
+      await axios.put(`${API}/${data_id}`, editForm);
       await fetchUsers();
       setEditId(null);
     } catch (error) {
@@ -77,29 +77,30 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
       <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
         <input
           onChange={handleChange}
-          value={form.product_name}
-          customer_name="product_name"
+          value={form.supplier_name}
+          name="supplier_name"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Product Name"
+          placeholder="Supplier Name"
         />
         <input
           onChange={handleChange}
-          value={form.product_qty}
-          customer_address="product_qrt"
+          value={form.supplier_location}
+          name="supplier_location"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Product QTY"
+          placeholder="Supplier Location"
         />
         <input
           onChange={handleChange}
           value={form.material_name}
-          order_date="material_name"
+          name="material_name"
           className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Material Name"
         />
         <input
           onChange={handleChange}
           value={form.material_qty}
-          order_qty="material_qty"
+          name="material_qty"
+          type="number"
           className="bg-white mx-1 w-34 px-2 rounded border"
           placeholder="Material QTY"
         />
@@ -113,8 +114,8 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
       <table className="w-full border-separate">
         <thead>
           <tr className="text-center font-bold bg-gray-200">
-            <th className="border p-2">Product_Name</th>
-            <th className="border p-2">Product_QTY</th>
+            <th className="border p-2">Supplier_Name</th>
+            <th className="border p-2">Supplier_Location</th>
             <th className="border p-2">Material_Name</th>
             <th className="border p-2">Material_QTY</th>
             <th className="border rounded-tr-lg p-2">Action</th>
@@ -122,22 +123,22 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id} className="bg-white">
-              {editId === user.id ? (
+            <tr key={user.data_id} className="bg-white">
+              {editId === user.data_id ? (
                 <>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.product_name}
+                      value={editForm.supplier_name}
                       onChange={handleEditChange}
-                      name="product_name"
+                      name="supplier_name"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.product_qty}
+                      value={editForm.supplier_location}
                       onChange={handleEditChange}
-                      name="product_qty"
+                      name="supplier_location"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
@@ -159,7 +160,7 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
                   </td>
                   <td className="border p-2 ">
                     <button
-                      onClick={() => handleEditSave(user.id)}
+                      onClick={() => handleEditSave(user.data_id)}
                       className="cursor-pointer bg-teal-400 hover:bg-teal-500 text-white px-2 rounded-xl"
                     >
                       Save
@@ -174,8 +175,8 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
                 </>
               ) : (
                 <>
-                  <td className="border p-2 ">{user.product_name}</td>
-                  <td className="border p-2 ">{user.product_qty}</td>
+                  <td className="border p-2 ">{user.supplier_name}</td>
+                  <td className="border p-2 ">{user.supplier_location}</td>
                   <td className="border p-2 ">{user.material_name}</td>
                   <td className="border p-2 ">{user.material_qty}</td>
                   <td className="border p-2 ">
@@ -186,7 +187,7 @@ export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDelete(user.data_id)}
                       className="cursor-pointer bg-rose-400 hover:bg-rose-500 text-white px-2 rounded-xl"
                     >
                       Delete

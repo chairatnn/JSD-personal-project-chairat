@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { SaleTable } from "../components/SaleTable";
+import { SaleTable } from "./SaleTable";
 import axios from "axios";
-import { PurchaseTable } from "@/components/PurchaseTable";
-import { ProductionTable } from "@/components/ProductionTable";
-import { WarehouseTable } from "@/components/WarehouseTable";
+import { PurchaseTable } from "./PurchaseTable";
+import { ProductionTable } from "./ProductionTable";
+import { WarehouseTable } from "./WarehouseTable";
 
 const API = "https://693fb530993d68afba696862.mockapi.io/api/1/maindata";
 
@@ -28,7 +28,7 @@ export default function Home() {
     <div className="min-h-screen p-6 gap-y-6 flex flex-col justify-start w-full">
       <section className="mt-10 text-5xl font-extrabold text-center">
         <h1>mini-ERP for StartUp</h1>
-        <h1 className="text-4xl py-2 hidden md:block">
+        <h1 className="text-3xl text-gray-600 py-2 hidden md:block">
           Generation Thailand JSD#11
         </h1>
       </section>

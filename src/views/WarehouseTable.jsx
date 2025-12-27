@@ -1,29 +1,28 @@
 import axios from "axios";
 import { useState } from "react";
 
-export function SaleTable({ users, setUsers, fetchUsers, API }) {
+export function WarehouseTable({ users, setUsers, fetchUsers, API }) {
   const [form, setForm] = useState({
-    customer_name: "",
-    customer_address: "",
-    order_date: "",
-    order_qty: "",
-
+    product_name: "",
+    product_qty: "",
+    material_name: "",
+    material_qty: "",
   });
 
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({
-    customer_name: "",
-    customer_address: "",
-    order_date: "",
-    order_qty: "",
+     product_name: "",
+    product_qty: "",
+    material_name: "",
+    material_qty: "",
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.data_id]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleEditChange = (e) => {
-    setEditForm({ ...editForm, [e.target.data_id]: e.target.value });
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -33,35 +32,35 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
       await fetchUsers();
       // Reset the form
       setForm({
-        customer_name: "",
-        customer_address: "",
-        order_date: "",
-        order_qty: "",
+   product_name: "",
+    product_qty: "",
+    material_name: "",
+    material_qty: "",
       });
     } catch (error) {
       console.error("Error creating user:", error);
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (data_id) => {
     if (!window.confirm("Delete this data?")) return;
-    await axios.delete(`${API}/${id}`);
-    setUsers(users.filter((user) => user.id !== id));
+    await axios.delete(`${API}/${data_id}`);
+    setUsers(users.filter((user) => user.data_id !== data_id));
   };
 
   const handleEdit = (user) => {
-    setEditId(user.id);
+    setEditId(user.data_id);
     setEditForm({
-      customer_name: user.customer_name,
-      customer_address: user.customer_address,
-      order_date: user.order_date,
-      order_qty: user.order_qty,
+      product_name: user.product_name,
+      product_qty: user.product_qty,
+      material_name: user.material_name,
+      material_qty: user.material_qty,
     });
   };
 
-  const handleEditSave = async (id) => {
+  const handleEditSave = async (data_id) => {
     try {
-      await axios.put(`${API}/${id}`, editForm);
+      await axios.put(`${API}/${data_id}`, editForm);
       await fetchUsers();
       setEditId(null);
     } catch (error) {
@@ -78,31 +77,31 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
       <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
         <input
           onChange={handleChange}
-          value={form.customer_name}
-          customer_name="customer_name"
+          value={form.product_name}
+          name="product_name"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Customer Name"
+          placeholder="Product Name"
         />
         <input
           onChange={handleChange}
-          value={form.customer_address}
-          customer_address="customer_address"
+          value={form.product_qty}
+          name="product_qrt"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Customer Address"
+          placeholder="Product QTY"
         />
-         <input
+        <input
           onChange={handleChange}
-          value={form.order_date}
-          order_date="order_date"
+          value={form.material_name}
+          name="material_name"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Order Date"
+          placeholder="Material Name"
         />
-         <input
+        <input
           onChange={handleChange}
-          value={form.order_qty}
-          order_qty="order_qty"
+          value={form.material_qty}
+          name="material_qty"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Order QTY"
+          placeholder="Material QTY"
         />
         <button
           type="submit"
@@ -114,53 +113,53 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
       <table className="w-full border-separate">
         <thead>
           <tr className="text-center font-bold bg-gray-200">
-            <th className="border p-2">Customer_Name</th>
-            <th className="border p-2">Customer_Address</th>
-            <th className="border p-2">Order_Date</th>
-            <th className="border p-2">Order_QTY</th>
+            <th className="border p-2">Product_Name</th>
+            <th className="border p-2">Product_QTY</th>
+            <th className="border p-2">Material_Name</th>
+            <th className="border p-2">Material_QTY</th>
             <th className="border rounded-tr-lg p-2">Action</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id} className="bg-white">
-              {editId === user.id ? (
+            <tr key={user.data_id} className="bg-white">
+              {editId === user.data_id ? (
                 <>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.customer_name}
+                      value={editForm.product_name}
                       onChange={handleEditChange}
-                      name="customer_name"
+                      name="product_name"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.customer_address}
+                      value={editForm.product_qty}
                       onChange={handleEditChange}
-                      name="customer_address"
+                      name="product_qty"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
-                     <td className="border p-2 ">
+                  <td className="border p-2 ">
                     <input
-                      value={editForm.order_date}
+                      value={editForm.material_name}
                       onChange={handleEditChange}
-                      name="order_date"
+                      name="material_name"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
-                     <td className="border p-2 ">
+                  <td className="border p-2 ">
                     <input
-                      value={editForm.order_qty}
+                      value={editForm.material_qty}
                       onChange={handleEditChange}
-                      name="order_qty"
+                      name="material_qty"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
                   <td className="border p-2 ">
                     <button
-                      onClick={() => handleEditSave(user.id)}
+                      onClick={() => handleEditSave(user.data_id)}
                       className="cursor-pointer bg-teal-400 hover:bg-teal-500 text-white px-2 rounded-xl"
                     >
                       Save
@@ -175,10 +174,10 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
                 </>
               ) : (
                 <>
-                  <td className="border p-2 ">{user.customer_name}</td>
-                  <td className="border p-2 ">{user.customer_address}</td>
-                  <td className="border p-2 ">{user.order_date}</td>
-                  <td className="border p-2 ">{user.order_qty}</td>
+                  <td className="border p-2 ">{user.product_name}</td>
+                  <td className="border p-2 ">{user.product_qty}</td>
+                  <td className="border p-2 ">{user.material_name}</td>
+                  <td className="border p-2 ">{user.material_qty}</td>
                   <td className="border p-2 ">
                     <button
                       onClick={() => handleEdit(user)}
@@ -187,7 +186,7 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDelete(user.data_id)}
                       className="cursor-pointer bg-rose-400 hover:bg-rose-500 text-white px-2 rounded-xl"
                     >
                       Delete

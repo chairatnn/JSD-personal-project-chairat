@@ -1,28 +1,26 @@
 import axios from "axios";
 import { useState } from "react";
 
-export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
+export function ProductionTable({ users, setUsers, fetchUsers, API }) {
   const [form, setForm] = useState({
-    supplier_name: "",
-    supplier_location: "",
-    material_name: "",
-    material_qty: "",
+    production_date: "",
+    product_name: "",
+    production_output: "",
   });
 
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({
-    supplier_name: "",
-    supplier_location: "",
-    material_name: "",
-    material_qty: "",
+    production_date: "",
+    product_name: "",
+    production_output: "",
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.data_id]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleEditChange = (e) => {
-    setEditForm({ ...editForm, [e.target.data_id]: e.target.value });
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -32,35 +30,33 @@ export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
       await fetchUsers();
       // Reset the form
       setForm({
-        supplier_name: "",
-        supplier_location: "",
-        material_name: "",
-        material_qty: "",
+        production_date: "",
+        product_name: "",
+        production_output: "",
       });
     } catch (error) {
       console.error("Error creating user:", error);
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (data_id) => {
     if (!window.confirm("Delete this data?")) return;
-    await axios.delete(`${API}/${id}`);
-    setUsers(users.filter((user) => user.id !== id));
+    await axios.delete(`${API}/${data_id}`);
+    setUsers(users.filter((user) => user.data_id !== data_id));
   };
 
   const handleEdit = (user) => {
-    setEditId(user.id);
+    setEditId(user.data_id);
     setEditForm({
-      supplier_name: user.supplier_name,
-      supplier_location: user.supplier_location,
-      material_name: user.material_name,
-      material_qty: user.material_qty,
+      production_date: user.production_date,
+      product_name: user.product_name,
+      production_output: user.production_output,
     });
   };
 
-  const handleEditSave = async (id) => {
+  const handleEditSave = async (data_id) => {
     try {
-      await axios.put(`${API}/${id}`, editForm);
+      await axios.put(`${API}/${data_id}`, editForm);
       await fetchUsers();
       setEditId(null);
     } catch (error) {
@@ -77,31 +73,24 @@ export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
       <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
         <input
           onChange={handleChange}
-          value={form.supplier_name}
-          customer_name="supplier_name"
+          value={form.production_date}
+          name="production_date"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Supplier Name"
+          placeholder="Production Date"
         />
         <input
           onChange={handleChange}
-          value={form.supplier_location}
-          customer_address="supplier_location"
+          value={form.product_name}
+          name="product_name"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Supplier Location"
+          placeholder="Product Name"
         />
         <input
           onChange={handleChange}
-          value={form.material_name}
-          order_date="material_name"
+          value={form.production_output}
+          name="production_output"
           className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Material Name"
-        />
-        <input
-          onChange={handleChange}
-          value={form.material_qty}
-          order_qty="material_qty"
-          className="bg-white mx-1 w-34 px-2 rounded border"
-          placeholder="Material QTY"
+          placeholder="Production Output"
         />
         <button
           type="submit"
@@ -113,53 +102,44 @@ export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
       <table className="w-full border-separate">
         <thead>
           <tr className="text-center font-bold bg-gray-200">
-            <th className="border p-2">Supplier_Name</th>
-            <th className="border p-2">Supplier_Location</th>
-            <th className="border p-2">Material_Name</th>
-            <th className="border p-2">Material_QTY</th>
+            <th className="border p-2">Production_Date</th>
+            <th className="border p-2">Product_Name</th>
+            <th className="border p-2">Production_Output</th>
             <th className="border rounded-tr-lg p-2">Action</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id} className="bg-white">
-              {editId === user.id ? (
+            <tr key={user.data_id} className="bg-white">
+              {editId === user.data_id ? (
                 <>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.supplier_name}
+                      value={editForm.production_date}
                       onChange={handleEditChange}
-                      name="supplier_name"
+                      name="production_date"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.supplier_location}
+                      value={editForm.product_name}
                       onChange={handleEditChange}
-                      name="supplier_location"
+                      name="product_name"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
                   <td className="border p-2 ">
                     <input
-                      value={editForm.material_name}
+                      value={editForm.production_output}
                       onChange={handleEditChange}
-                      name="material_name"
-                      className="bg-white w-24 px-2 rounded border"
-                    />
-                  </td>
-                  <td className="border p-2 ">
-                    <input
-                      value={editForm.material_qty}
-                      onChange={handleEditChange}
-                      name="material_qty"
+                      name="production_output"
                       className="bg-white w-24 px-2 rounded border"
                     />
                   </td>
                   <td className="border p-2 ">
                     <button
-                      onClick={() => handleEditSave(user.id)}
+                      onClick={() => handleEditSave(user.data_id)}
                       className="cursor-pointer bg-teal-400 hover:bg-teal-500 text-white px-2 rounded-xl"
                     >
                       Save
@@ -174,10 +154,9 @@ export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
                 </>
               ) : (
                 <>
-                  <td className="border p-2 ">{user.supplier_name}</td>
-                  <td className="border p-2 ">{user.supplier_location}</td>
-                  <td className="border p-2 ">{user.material_name}</td>
-                  <td className="border p-2 ">{user.material_qty}</td>
+                  <td className="border p-2 ">{user.production_date}</td>
+                  <td className="border p-2 ">{user.product_name}</td>
+                  <td className="border p-2 ">{user.production_output}</td>
                   <td className="border p-2 ">
                     <button
                       onClick={() => handleEdit(user)}
@@ -186,7 +165,7 @@ export function PurchaseTable({ users, setUsers, fetchUsers, API }) {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDelete(user.data_id)}
                       className="cursor-pointer bg-rose-400 hover:bg-rose-500 text-white px-2 rounded-xl"
                     >
                       Delete
