@@ -70,41 +70,43 @@ export function ProductionTable({ users, setUsers, fetchUsers, API }) {
 
   return (
     <div className="flex flex-col items-center">
-      <form onSubmit={handleSubmit} className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center">
+      <form onSubmit={handleSubmit} className="pb-3 flex flex-col items-start md:flex-row gap-3 w-full">
         <input
           onChange={handleChange}
           value={form.production_date}
           name="production_date"
-          className="bg-white mx-1 w-34 px-2 rounded border"
+          type="date"
+          className="bg-white mx-1 w-40 px-2 rounded border"
           placeholder="Production Date"
         />
         <input
           onChange={handleChange}
           value={form.product_name}
           name="product_name"
-          className="bg-white mx-1 w-34 px-2 rounded border"
+          className="bg-white mx-1 w-40 px-2 rounded border"
           placeholder="Product Name"
         />
         <input
           onChange={handleChange}
           value={form.production_output}
           name="production_output"
-          className="bg-white mx-1 w-34 px-2 rounded border"
+          type="number"
+          className="bg-white mx-1 w-40 px-2 rounded border"
           placeholder="Production Output"
         />
         <button
           type="submit"
-          className="cursor-pointer bg-sky-500 hover:bg-sky-600 text-white px-3 py-2 mx-1 rounded-4xl"
+          className="cursor-pointer bg-sky-500 hover:bg-sky-400 text-white px-3 py-2 mx-2 rounded-4xl"
         >
           Save new data
         </button>
       </form>
-      <table className="w-full border-separate">
+      <table className="w-full border-separate border-spacing-0 text-left">
         <thead>
           <tr className="text-center font-bold bg-gray-200">
-            <th className="border p-2">Production_Date</th>
-            <th className="border p-2">Product_Name</th>
-            <th className="border p-2">Production_Output</th>
+            <th className="border-b p-3 text-sm">Production_Date</th>
+            <th className="border-b p-3 text-sm">Product_Name</th>
+            <th className="border-b p-3 text-sm">Production_Output</th>
             <th className="border rounded-tr-lg p-2">Action</th>
           </tr>
         </thead>
@@ -140,13 +142,13 @@ export function ProductionTable({ users, setUsers, fetchUsers, API }) {
                   <td className="border p-2 ">
                     <button
                       onClick={() => handleEditSave(user.data_id)}
-                      className="cursor-pointer bg-teal-400 hover:bg-teal-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-teal-400 hover:bg-teal-500 text-white min-w-16 px-2 rounded-xl"
                     >
                       Save
                     </button>
                     <button
                       onClick={handleEditCancel}
-                      className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-white min-w-16 px-2 rounded-xl"
                     >
                       Cancel
                     </button>
@@ -154,19 +156,19 @@ export function ProductionTable({ users, setUsers, fetchUsers, API }) {
                 </>
               ) : (
                 <>
-                  <td className="border p-2 ">{user.production_date}</td>
-                  <td className="border p-2 ">{user.product_name}</td>
-                  <td className="border p-2 ">{user.production_output}</td>
-                  <td className="border p-2 ">
+                  <td className="border-b p-3 text-sm">{user.production_date}</td>
+                  <td className="border-b p-3 text-sm">{user.product_name}</td>
+                  <td className="border-b p-3 text-sm">{user.production_output}</td>
+                  <td className="border-b p-3 text-sm">
                     <button
                       onClick={() => handleEdit(user)}
-                      className="cursor-pointer bg-green-400 hover:bg-green-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-green-400 hover:bg-green-500 text-white min-w-14 px-2 rounded-xl"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(user.data_id)}
-                      className="cursor-pointer bg-rose-400 hover:bg-rose-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-rose-400 hover:bg-rose-500 text-white min-w-14 px-2 rounded-xl"
                     >
                       Delete
                     </button>
@@ -177,6 +179,9 @@ export function ProductionTable({ users, setUsers, fetchUsers, API }) {
           ))}
         </tbody>
       </table>
+          <p className="mt-2 text-[10px] text-slate-900 italic md:hidden text-left w-full px-1">
+          * Scroll to see more table information.
+        </p>
     </div>
   );
 }

@@ -80,20 +80,20 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
     <div className="flex flex-col items-center">
       <form
         onSubmit={handleSubmit}
-        className="pb-3 flex flex-col md:flex-row gap-3 w-full items-center"
+        className="pb-3 flex flex-col items-baseline md:flex-row gap-3 w-full"
       >
         <input
           onChange={handleChange}
           value={form.customer_name}
           name="customer_name"
-          className="bg-white mx-1 w-34 px-2 rounded border"
+          className="bg-white mx-1 w-40 px-2 rounded border"
           placeholder="Customer Name"
         />
         <input
           onChange={handleChange}
           value={form.customer_address}
           name="customer_address"
-          className="bg-white mx-1 w-34 px-2 rounded border"
+          className="bg-white mx-1 w-40 px-2 rounded border"
           placeholder="Customer Address"
         />
         <input
@@ -101,7 +101,7 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
           value={form.order_date}
           name="order_date"
           type="date"
-          className="bg-white mx-1 w-34 px-2 rounded border"
+          className="bg-white mx-1 w-40 px-2 rounded border"
           placeholder="Order Date"
         />
         <input
@@ -109,24 +109,24 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
           value={form.order_qty}
           name="order_qty"
           type="number"
-          className="bg-white mx-1 w-34 px-2 rounded border"
+          className="bg-white mx-1 w-40 px-2 rounded border"
           placeholder="Order QTY"
         />
         <button
           type="submit"
-          className="cursor-pointer bg-sky-500 hover:bg-sky-600 text-white px-3 py-2 mx-1 rounded-4xl"
+          className="cursor-pointer bg-sky-500 hover:bg-sky-400 text-white px-3 py-2 mx-2 rounded-4xl"
         >
           Save new data
         </button>
       </form>
-      <table className="w-full border-separate">
+      <table className="w-full border-separate border-spacing-0 text-left">
         <thead>
           <tr className="text-center font-bold bg-gray-200">
-            <th className="border p-2">Customer_Name</th>
-            <th className="border p-2">Customer_Address</th>
-            <th className="border p-2">Order_Date</th>
-            <th className="border p-2">Order_QTY</th>
-            <th className="border rounded-tr-lg p-2">Action</th>
+            <th className="border-b p-3 text-sm">Customer_Name</th>
+            <th className="border-b p-3 text-sm">Customer_Address</th>
+            <th className="border-b p-3 text-sm">Order_Date</th>
+            <th className="border-b p-3 text-sm">Order_QTY</th>
+            <th className="border-b p-3 text-sm rounded-tr-lg">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -171,13 +171,13 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
                   <td className="border p-2 ">
                     <button
                       onClick={() => handleEditSave(user.data_id)}
-                      className="cursor-pointer bg-teal-400 hover:bg-teal-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-teal-400 hover:bg-teal-500 text-white min-w-16 px-2 rounded-xl"
                     >
                       Save
                     </button>
                     <button
                       onClick={handleEditCancel}
-                      className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-white min-w-16 px-2 rounded-xl"
                     >
                       Cancel
                     </button>
@@ -185,20 +185,20 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
                 </>
               ) : (
                 <>
-                  <td className="border p-2 ">{user.customer_name}</td>
-                  <td className="border p-2 ">{user.customer_address}</td>
-                  <td className="border p-2 ">{user.order_date}</td>
-                  <td className="border p-2 ">{user.order_qty}</td>
-                  <td className="border p-2 ">
+                  <td className="border-b p-3 text-sm">{user.customer_name}</td>
+                  <td className="border-b p-3 text-sm">{user.customer_address}</td>
+                  <td className="border-b p-3 text-sm">{user.order_date}</td>
+                  <td className="border-b p-3 text-sm">{user.order_qty}</td>
+                  <td className="border-b p-3 text-sm">
                     <button
                       onClick={() => handleEdit(user)}
-                      className="cursor-pointer bg-green-400 hover:bg-green-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-green-400 hover:bg-green-500 text-white min-w-14 px-2 rounded-xl"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(user.data_id)}
-                      className="cursor-pointer bg-rose-400 hover:bg-rose-500 text-white px-2 rounded-xl"
+                      className="cursor-pointer bg-rose-400 hover:bg-rose-500 text-white min-w-14 px-2 rounded-xl"
                     >
                       Delete
                     </button>
@@ -209,6 +209,9 @@ export function SaleTable({ users, setUsers, fetchUsers, API }) {
           ))}
         </tbody>
       </table>
-    </div>
+       <p className="mt-2 text-[10px] text-slate-900 italic md:hidden text-left w-full px-1">
+          * Scroll to see more table information.
+        </p>
+      </div>
   );
 }
