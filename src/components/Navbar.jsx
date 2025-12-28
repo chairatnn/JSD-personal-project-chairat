@@ -16,7 +16,16 @@ export function Navbar() {
     <nav>
       <ul className="flex items-center justify-center md:justify-end w-full bg-blue-500 h-14 border-b-2 border-black gap-x-4 text-0.5rem md:text-1rem text-white px-4">
         <li>
-          <Link to="/" className=" hover:text-gray-300">
+          <Link
+            to="/"
+            className=" hover:text-gray-300"
+            onClick={() => {
+              // หากมีวิธีส่ง Dispatch หรือเรียกใช้ Window location โดยตรง
+              if (window.location.pathname === "/") {
+                window.location.reload();
+              }
+            }}
+          >
             Home
           </Link>
         </li>
